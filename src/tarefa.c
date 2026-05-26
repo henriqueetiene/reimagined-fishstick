@@ -88,12 +88,14 @@ void insere_lista_final_tarefa(Lista_tarefa *li_tarefa, struct tarefa t)
     if(li_tarefa == NULL)
     {
         printf("Não há lista de tarefas\n");
+        getchar();
         return;
     }
 
     if(li_tarefa->qtd == MAX_TAREFA)
     {
-        printf("Lista de tarefas está cheia\n");
+        printf("Lista de tarefas está cheia para inserção\n");
+        getchar();
         return;
     }
 
@@ -110,12 +112,14 @@ void remove_lista_ordenada_tarefa(Lista_tarefa *li_tarefa, int codigo)
     if(li_tarefa == NULL)
     {
         printf("Não há lista de tarefas\n");
+        getchar();
         return;
     }
 
     if(li_tarefa->qtd == 0)
     {
         printf("Lista de tarefas está vazia\n");
+        getchar();
         return;
     }
 
@@ -128,12 +132,13 @@ void remove_lista_ordenada_tarefa(Lista_tarefa *li_tarefa, int codigo)
     if(i == li_tarefa->qtd)
     {
         printf("Tarefa não encontrada para remoção\n");
+        getchar();
         return;
     }
 
     for(int k = i; k < li_tarefa->qtd-1; k++ )
     {
-        li_tarefa->dados[k] = li_tarefa->dados[k+1];
+        li_tarefa->dados[k] = li_tarefa->dados[k + 1];
     }
 
     li_tarefa->qtd--;
@@ -148,6 +153,7 @@ void consulta_lista_codigo_tarefa(Lista_tarefa *li_tarefa, int codigo)
     if(li_tarefa == NULL)
     {
         printf("Não há lista de tarefas\n");
+        getchar();
         return;
     }
 
@@ -160,6 +166,7 @@ void consulta_lista_codigo_tarefa(Lista_tarefa *li_tarefa, int codigo)
     if(i == li_tarefa->qtd)
     {
         printf("Tarefa não encontrada\n");
+        getchar();
         return;
     }
 
@@ -177,6 +184,7 @@ void imprime_lista_tarefa(Lista_tarefa *li_tarefa)
     if(li_tarefa == NULL)
     {
         printf("Não há lista de tarefas\n");
+        getchar();
         return;
     }
 
