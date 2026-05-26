@@ -1,13 +1,12 @@
 #include <stdlib.h>
-#include <math.h>
 #include <stdio.h>
-#include <string.h> // Para usar a função strcmp
+#include <string.h>
 #include "pessoa.h"
 
-// Definição do tipo Lista_pessoa de pessoas 
-struct lista_pessoa {
+struct lista_pessoa
+{
     int qtd;
-    struct pessoa dados[MAX];
+    struct pessoa dados[MAX_PESSOA];
 };
 
 Lista_pessoa *cria_lista_pessoas()
@@ -27,70 +26,100 @@ void libera_lista_pessoas(Lista_pessoa *li)
     free(li);
 }
 
-int tamanho_lista_pessoas(Lista_pessoa *li)
+void tamanho_lista_pessoas(Lista_pessoa *li)
 {
     if(li == NULL)
     {
-        return -1;
+        printf("Não há lista de pessoas\n");
     }
     else
     {
-        return li->qtd;
-    } 
+        printf("Quantidade de pessoas cadastradas: %d\n", li->qtd);
+    }
+
+    getchar();
 }
 
-int lista_cheia_pessoas(Lista_pessoa *li)
+void lista_cheia_pessoas(Lista_pessoa *li)
 {
     if(li == NULL)
     {
-        return -1;
+        printf("Não há lista de pessoas\n");
     }
     else
     {
-        return (li->qtd == MAX);
+        if (li->qtd == MAX_PESSOA)
+        {
+            printf("Lista de pessoas está cheia\n");
+        }
+        else
+        {
+            printf("Lista de pessoas não está cheia\n");
+        }
     }
+
+    getchar();
 }
 
-int lista_vazia_pessoas(Lista_pessoa *li)
+void lista_vazia_pessoas(Lista_pessoa *li)
 {
     if(li == NULL)
     {
-        return -1;
+        printf("Não há lista de pessoas\n");
     }
     else
     {
-        return (li->qtd == 0);
+        if (li->qtd == 0)
+        {
+            printf("Lista de pessoas está vazia\n");
+        }
+        else
+        {
+            printf("Lista de pessoas não está vazia\n");
+        }
     }
+
+    getchar();
 }
 
-int insere_lista_final_pessoas(Lista_pessoa *li, struct pessoa p)
+void insere_lista_final_pessoas(Lista_pessoa *li, struct pessoa p)
 {
     if(li == NULL)
     {
-        return 0;
+        printf("Não há lista de pessoas\n");
+        getchar();
+        return;
     }
 
-    if(lista_cheia_pessoas(li))
+    if(li->qtd == MAX_PESSOA)
     {
-        return 0;
+        printf("Lista de pessoas está cheia para inserção\n");
+        getchar();
+        return;
     }
 
     li->dados[li->qtd] = p;
     li->qtd++;
 
-    return 1;
+    printf("Pessoa inserida com sucesso\n");
+
+    getchar();
 }
 
-int remove_lista_ordenada_pessoas(Lista_pessoa *li, int codigo)
+void remove_lista_ordenada_pessoas(Lista_pessoa *li, int codigo)
 {
     if(li == NULL)
     {
-        return 0;
+        printf("Não há lista de pessoas\n");
+        getchar();
+        return;
     }
 
-    if(lista_vazia_pessoas(li))
+    if(li->qtd == 0)
     {
-        return 0;
+        printf("Lista de pessoas está vazia para remoção\n");
+        getchar();
+        return;
     }
 
     int i = 0;
@@ -101,7 +130,9 @@ int remove_lista_ordenada_pessoas(Lista_pessoa *li, int codigo)
 
     if(i == li->qtd)
     {
-        return 0;
+        printf("Pessoa não encontrada para remoção\n");
+        getchar();
+        return;
     }
 
     for(int k = i; k < li->qtd - 1; k++ )
@@ -111,14 +142,18 @@ int remove_lista_ordenada_pessoas(Lista_pessoa *li, int codigo)
 
     li->qtd--;
 
-    return 1;
+    printf("Pessoa removida com sucesso\n");
+
+    getchar();
 }
 
-int consulta_lista_codigo_pessoas(Lista_pessoa *li, int cod, struct pessoa *p)
+void consulta_lista_codigo_pessoas(Lista_pessoa *li, int cod)
 {
     if(li == NULL)
     {
-        return 0;
+        printf("Não há lista de pessoas\n");
+        getchar();
+        return;
     }
 
     int i = 0;
@@ -129,20 +164,25 @@ int consulta_lista_codigo_pessoas(Lista_pessoa *li, int cod, struct pessoa *p)
 
     if(i == li->qtd)
     {
-        return 0;
+        printf("Pessoa não encontrada\n");
+        getchar();
+        return;
     }
 
-    *p = li->dados[i];
+    printf("Codigo: %d\n", li->dados[i].codigo);
+    printf("Nome: %s\n", li->dados[i].nome);
 
-    return 1;
+    getchar();
 }
 
 
-int consulta_lista_nome_pessoas(Lista_pessoa *li, char *nome, struct pessoa *p)
+void consulta_lista_nome_pessoas(Lista_pessoa *li, char *nome)
 {
     if(li == NULL)
     {
-        return 0;
+        printf("Não há lista de pessoas\n");
+        getchar();
+        return;
     }
 
     int i = 0;
@@ -153,26 +193,32 @@ int consulta_lista_nome_pessoas(Lista_pessoa *li, char *nome, struct pessoa *p)
 
     if(i == li->qtd)
     {
-        return 0;
+        printf("Pessoa não encontrada\n");
+        getchar();
+        return;
     }
 
-    *p = li->dados[i];
+    printf("Codigo: %d\n", li->dados[i].codigo);
+    printf("Nome: %s\n", li->dados[i].nome);
 
-    return 1;
+    getchar();
 }
 
-int imprime_lista_pessoas(Lista_pessoa *li)
+void imprime_lista_pessoas(Lista_pessoa *li)
 {
     if(li == NULL)
     {
-        return 0;
+        printf("Não há lista de pessoas\n");
+        getchar();
+        return;
     }
 
     for(int i = 0; i < li->qtd; i++)
     {
         printf("----------------------------------------------\n"); 
         printf("codigo: %d\n",li->dados[i].codigo);
-        printf("Nome: %s \n",li->dados[i].nome);
+        printf("Nome: %s\n",li->dados[i].nome);
     }
+
     getchar();
 }
