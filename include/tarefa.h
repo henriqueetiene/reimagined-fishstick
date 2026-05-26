@@ -19,10 +19,10 @@ void tamanho_lista_tarefa(Lista_tarefa *li);
 void lista_cheia_tarefa(Lista_tarefa *li);
 void lista_vazia_tarefa(Lista_tarefa *li);
 
-void insere_lista_final_tarefa(Lista_tarefa *li, struct tarefa tu);
+void insere_lista_final_tarefa(Lista_tarefa *li, struct tarefa t);
 
 void remove_lista_ordenada_tarefa(Lista_tarefa *li, int codigo);
 
-void consulta_lista_codigo_tarefa(Lista_tarefa *li, int codigo, struct tarefa *tu);
+void consulta_lista_codigo_tarefa(Lista_tarefa *li, int codigo);
 
 void imprime_lista_tarefa(Lista_tarefa *li);
