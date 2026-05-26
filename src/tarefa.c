@@ -174,8 +174,8 @@ void consulta_lista_codigo_tarefa(Lista_tarefa *li_tarefa, int codigo)
     printf("Descrição: %s\n", li_tarefa->dados[i].descricao);
 
     printf("---------- Pessoa relacionada para a tarefa ----------\n");
-    printf("Código: %d\n", li_tarefa->dados[i].pessoa->codigo);
-    printf("Nome: %s\n", li_tarefa->dados[i].pessoa->nome);
+    printf("Código: %d\n", li_tarefa->dados[i].pessoa.codigo);
+    printf("Nome: %s\n", li_tarefa->dados[i].pessoa.nome);
 
     getchar();
 }
@@ -196,8 +196,8 @@ void imprime_lista_tarefa(Lista_tarefa *li_tarefa)
         printf("Descrição: %s\n", li_tarefa->dados[i].descricao);
 
         printf("---------- Pessoa relacionada para a tarefa ----------\n");
-        printf("Código: %d\n", li_tarefa->dados[i].pessoa->codigo);
-        printf("Nome: %s\n", li_tarefa->dados[i].pessoa->nome);
+        printf("Código: %d\n", li_tarefa->dados[i].pessoa.codigo);
+        printf("Nome: %s\n", li_tarefa->dados[i].pessoa.nome);
     }
 
     getchar();
