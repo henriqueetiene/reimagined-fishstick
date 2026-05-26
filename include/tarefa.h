@@ -7,7 +7,7 @@
 struct tarefa {
     int codigo;
     char descricao[100];
-    struct pessoa *pessoa;
+    struct pessoa pessoa;
 };
 
 typedef struct lista_tarefa Lista_tarefa;
