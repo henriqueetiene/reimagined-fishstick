@@ -173,8 +173,9 @@ void consulta_lista_codigo_tarefa(Lista_tarefa *li_tarefa, int codigo)
     printf("Código: %d\n", li_tarefa->dados[i].codigo);
     printf("Descrição: %s\n", li_tarefa->dados[i].descricao);
 
-    printf("---------- Pessoas relacionadas para a tarefa ----------\n");
-    imprime_lista_pessoas(li_tarefa->dados[i].lista_pessoa);
+    printf("---------- Pessoa relacionada para a tarefa ----------\n");
+    printf("Código: %d\n", li_tarefa->dados[i].pessoa->codigo);
+    printf("Nome: %s\n", li_tarefa->dados[i].pessoa->nome);
 
     getchar();
 }
@@ -190,11 +191,13 @@ void imprime_lista_tarefa(Lista_tarefa *li_tarefa)
 
     for(int i = 0; i < li_tarefa->qtd; i++)
     {
-        printf("Código: %d\n",li_tarefa->dados[i].codigo);
-        printf("Descrição: %s\n",li_tarefa->dados[i].descricao);
+        printf("------------------------------------------------------\n");
+        printf("Código: %d\n", li_tarefa->dados[i].codigo);
+        printf("Descrição: %s\n", li_tarefa->dados[i].descricao);
 
-        printf("---------- Pessoas relacionadas para a tarefa ----------\n");
-        imprime_lista_pessoas(li_tarefa->dados[i].lista_pessoa);
+        printf("---------- Pessoa relacionada para a tarefa ----------\n");
+        printf("Código: %d\n", li_tarefa->dados[i].pessoa->codigo);
+        printf("Nome: %s\n", li_tarefa->dados[i].pessoa->nome);
     }
 
     getchar();
