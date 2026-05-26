@@ -2,7 +2,7 @@
 
 #include "pessoa.h"
 
-#define MAX_TAREFA 40
+#define MAX_TAREFA 2
 
 struct tarefa {
     int codigo;
@@ -21,8 +21,8 @@ void lista_vazia_tarefa(Lista_tarefa *li);
 
 void insere_lista_final_tarefa(Lista_tarefa *li, struct tarefa tu);
 
-int remove_lista_ordenada_tarefa(Lista_tarefa *li, int codigo);
+void remove_lista_ordenada_tarefa(Lista_tarefa *li, int codigo);
 
-int consulta_lista_codigo_tarefa(Lista_tarefa *li, int codigo, struct tarefa *tu);
+void consulta_lista_codigo_tarefa(Lista_tarefa *li, int codigo, struct tarefa *tu);
 
-int imprime_lista_tarefa(Lista_tarefa *li);
+void imprime_lista_tarefa(Lista_tarefa *li);
