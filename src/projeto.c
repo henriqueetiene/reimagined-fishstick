@@ -185,6 +185,13 @@ void imprime_lista_projeto(Lista_projeto *li)
         return;
     }
 
+    if (li->qtd == 0)
+    {
+        printf("Lista de projetos está vazia\n");
+        getchar();
+        return;
+    }
+
     for(int i = 0; i < li->qtd; i++)
     {
         printf("------------------------------------------------------\n");
