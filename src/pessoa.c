@@ -213,6 +213,14 @@ void imprime_lista_pessoas(Lista_pessoa *li)
         return;
     }
 
+    if (li->qtd == 0)
+    {
+        printf("Lista de pessoas está vazia\n");
+        getchar();
+        return;
+    }
+
+
     for(int i = 0; i < li->qtd; i++)
     {
         printf("----------------------------------------------\n"); 
