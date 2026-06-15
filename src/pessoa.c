@@ -122,7 +122,7 @@ void remove_lista_ordenada_pessoas(Lista_pessoa *li, int codigo)
         return;
     }
 
-    for(int k = i; k < li->qtd - 1; k++ )
+    for(int k = i; k < li->qtd - 1; k++)
     {
         li->dados[k] = li->dados[k + 1];
     }
