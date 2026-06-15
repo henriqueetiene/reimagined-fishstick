@@ -185,6 +185,14 @@ void imprime_lista_tarefa(Lista_tarefa *li_tarefa)
         return;
     }
 
+    if (li_tarefa->qtd == 0)
+    {
+        printf("Lista de tarefas está vazia\n");
+        getchar();
+        return;
+    }
+    
+
     for(int i = 0; i < li_tarefa->qtd; i++)
     {
         printf("------------------------------------------------------\n");
