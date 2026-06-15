@@ -101,7 +101,7 @@ void insere_lista_final_pessoas(Lista_pessoa *li, struct pessoa p)
     li->dados[li->qtd] = p;
     li->qtd++;
 
-    printf("Pessoa inserida com sucesso\n");
+    printf("Pessoa cadastrada com sucesso\n");
 
     getchar();
 }
