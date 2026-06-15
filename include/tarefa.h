@@ -4,7 +4,8 @@
 
 #define MAX_TAREFA 2
 
-struct tarefa {
+struct tarefa
+{
     int codigo;
     char descricao[100];
     struct pessoa pessoa;

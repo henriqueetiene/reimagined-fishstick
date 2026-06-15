@@ -124,7 +124,7 @@ void remove_lista_ordenada_tarefa(Lista_tarefa *li_tarefa, int codigo)
     }
 
     int i = 0;
-    while(i < li_tarefa->qtd  && li_tarefa->dados[i].codigo !=  codigo)
+    while(i < li_tarefa->qtd  && li_tarefa->dados[i].codigo != codigo)
     {
         i++;
     }

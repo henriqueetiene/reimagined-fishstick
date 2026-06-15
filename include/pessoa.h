@@ -2,7 +2,8 @@
 
 #define MAX_PESSOA 2
 
-struct pessoa {
+struct pessoa
+{
     int codigo;
     char nome[30];
 };
