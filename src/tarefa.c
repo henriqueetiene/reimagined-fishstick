@@ -102,7 +102,7 @@ void insere_lista_final_tarefa(Lista_tarefa *li_tarefa, struct tarefa t)
     li_tarefa->dados[li_tarefa->qtd] = t;
     li_tarefa->qtd++;
 
-    printf("Tarefa inserida com sucesso\n");
+    printf("Tarefa cadastrada com sucesso\n");
 
     getchar();
 }
@@ -173,10 +173,6 @@ void consulta_lista_codigo_tarefa(Lista_tarefa *li_tarefa, int codigo)
     printf("Código: %d\n", li_tarefa->dados[i].codigo);
     printf("Descrição: %s\n", li_tarefa->dados[i].descricao);
 
-    printf("---------- Pessoa relacionada para a tarefa ----------\n");
-    printf("Código: %d\n", li_tarefa->dados[i].pessoa.codigo);
-    printf("Nome: %s\n", li_tarefa->dados[i].pessoa.nome);
-
     getchar();
 }
 
@@ -194,10 +190,6 @@ void imprime_lista_tarefa(Lista_tarefa *li_tarefa)
         printf("------------------------------------------------------\n");
         printf("Código: %d\n", li_tarefa->dados[i].codigo);
         printf("Descrição: %s\n", li_tarefa->dados[i].descricao);
-
-        printf("---------- Pessoa relacionada para a tarefa ----------\n");
-        printf("Código: %d\n", li_tarefa->dados[i].pessoa.codigo);
-        printf("Nome: %s\n", li_tarefa->dados[i].pessoa.nome);
     }
 
     getchar();
