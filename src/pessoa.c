@@ -90,6 +90,12 @@ void insere_lista_final_pessoas(Lista_pessoa *li, struct pessoa p)
         return;
     }
 
+    if (p.codigo <= 0)
+    {
+        printf("Código deve ser um valor positivo maior que 0\n");
+        return;
+    }
+
     li->dados[li->qtd] = p;
     li->qtd++;
 
@@ -132,12 +138,12 @@ void remove_lista_ordenada_pessoas(Lista_pessoa *li, int codigo)
     printf("Pessoa removida com sucesso\n");
 }
 
-void consulta_lista_codigo_pessoas(Lista_pessoa *li, int cod)
+struct pessoa consulta_lista_codigo_pessoas(Lista_pessoa *li, int cod)
 {
     if(li == NULL)
     {
         printf("Não há lista de pessoas\n");
-        return;
+        return (struct pessoa){-1};
     }
 
     int i = 0;
@@ -149,11 +155,10 @@ void consulta_lista_codigo_pessoas(Lista_pessoa *li, int cod)
     if(i == li->qtd)
     {
         printf("Pessoa não encontrada\n");
-        return;
+        return (struct pessoa){-1};
     }
 
-    printf("Codigo: %d\n", li->dados[i].codigo);
-    printf("Nome: %s\n", li->dados[i].nome);
+    return li->dados[i];
 }
 
 

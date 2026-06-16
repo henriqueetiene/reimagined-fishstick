@@ -21,7 +21,7 @@ void insere_lista_final_pessoas(Lista_pessoa *li, struct pessoa p);
 
 void remove_lista_ordenada_pessoas(Lista_pessoa *li, int codigo);
 
-void consulta_lista_codigo_pessoas(Lista_pessoa *li, int cod);
+struct pessoa consulta_lista_codigo_pessoas(Lista_pessoa *li, int cod);
 void consulta_lista_nome_pessoas(Lista_pessoa *li, char *nome);
 
 void imprime_lista_pessoas(Lista_pessoa *li);

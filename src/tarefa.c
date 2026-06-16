@@ -37,8 +37,6 @@ void tamanho_lista_tarefa(Lista_tarefa *li_tarefa)
     {
         printf("Quantidade de tarefas cadastradas: %d\n", li_tarefa->qtd);
     }
-
-    getchar();
 }
 
 void lista_cheia_tarefa(Lista_tarefa *li_tarefa)
@@ -58,8 +56,6 @@ void lista_cheia_tarefa(Lista_tarefa *li_tarefa)
             printf("Lista de tarefas não está cheia\n");
         }
     }
-
-    getchar();
 }
 
 void lista_vazia_tarefa(Lista_tarefa *li_tarefa)
@@ -79,8 +75,6 @@ void lista_vazia_tarefa(Lista_tarefa *li_tarefa)
             printf("Lista de tarefas não está vazia\n");
         }
     }
-
-    getchar();
 }
 
 void insere_lista_final_tarefa(Lista_tarefa *li_tarefa, struct tarefa t)
@@ -88,23 +82,25 @@ void insere_lista_final_tarefa(Lista_tarefa *li_tarefa, struct tarefa t)
     if(li_tarefa == NULL)
     {
         printf("Não há lista de tarefas\n");
-        getchar();
         return;
     }
 
     if(li_tarefa->qtd == MAX_TAREFA)
     {
         printf("Lista de tarefas está cheia para inserção\n");
-        getchar();
         return;
     }
+
+    if (t.codigo <= 0)
+    {
+        printf("Código deve ser um valor positivo maior que 0\n");
+        return;
+    }    
 
     li_tarefa->dados[li_tarefa->qtd] = t;
     li_tarefa->qtd++;
 
     printf("Tarefa cadastrada com sucesso\n");
-
-    getchar();
 }
 
 void remove_lista_ordenada_tarefa(Lista_tarefa *li_tarefa, int codigo)
@@ -112,14 +108,12 @@ void remove_lista_ordenada_tarefa(Lista_tarefa *li_tarefa, int codigo)
     if(li_tarefa == NULL)
     {
         printf("Não há lista de tarefas\n");
-        getchar();
         return;
     }
 
     if(li_tarefa->qtd == 0)
     {
         printf("Lista de tarefas está vazia\n");
-        getchar();
         return;
     }
 
@@ -132,7 +126,6 @@ void remove_lista_ordenada_tarefa(Lista_tarefa *li_tarefa, int codigo)
     if(i == li_tarefa->qtd)
     {
         printf("Tarefa não encontrada para remoção\n");
-        getchar();
         return;
     }
 
@@ -144,17 +137,14 @@ void remove_lista_ordenada_tarefa(Lista_tarefa *li_tarefa, int codigo)
     li_tarefa->qtd--;
 
     printf("Tarefa removida com sucesso\n");
-
-    getchar();
 }
 
-void consulta_lista_codigo_tarefa(Lista_tarefa *li_tarefa, int codigo)
+struct tarefa consulta_lista_codigo_tarefa(Lista_tarefa *li_tarefa, int codigo)
 {
     if(li_tarefa == NULL)
     {
         printf("Não há lista de tarefas\n");
-        getchar();
-        return;
+        return (struct tarefa){-1};
     }
 
     int i = 0;
@@ -166,14 +156,71 @@ void consulta_lista_codigo_tarefa(Lista_tarefa *li_tarefa, int codigo)
     if(i == li_tarefa->qtd)
     {
         printf("Tarefa não encontrada\n");
-        getchar();
+        return (struct tarefa){-1};
+    }
+
+    return li_tarefa->dados[i];
+}
+
+void adiciona_pessoa_tarefa(Lista_tarefa *li_tarefa, struct pessoa p, int codigo)
+{
+    int i = 0;
+    while(i < li_tarefa->qtd && li_tarefa->dados[i].codigo != codigo)
+    {
+        i++;
+    }
+
+    li_tarefa->dados[i].pessoa = p;
+}
+
+void remove_pessoa_tarefa(Lista_tarefa *li_tarefa, int codigo)
+{
+    int i = 0;
+    while(i < li_tarefa->qtd && li_tarefa->dados[i].codigo != codigo)
+    {
+        i++;
+    }
+
+    if(i == li_tarefa->qtd)
+    {
+        printf("Tarefa não encontrada\n");
         return;
     }
 
-    printf("Código: %d\n", li_tarefa->dados[i].codigo);
-    printf("Descrição: %s\n", li_tarefa->dados[i].descricao);
+    if (li_tarefa->dados[i].pessoa.codigo == -1)
+    {
+        printf("Não há pessoa vinculada para essa tarefa\n");
+        return;
+    }
 
-    getchar();
+    li_tarefa->dados[i].pessoa.codigo = -1;
+    
+    printf("Pessoa removida da tarefa\n");
+}
+
+void remove_pessoa_deletada_tarefa(Lista_tarefa *li_tarefa, int cod_pessoa)
+{
+    if(li_tarefa == NULL)
+    {
+        printf("Não há lista de tarefas\n");
+        return;
+    }
+
+    int i = 0;
+    while(i < li_tarefa->qtd && li_tarefa->dados[i].pessoa.codigo != cod_pessoa)
+    {
+        i++;
+    }
+
+    if(i == li_tarefa->qtd)
+    {
+        printf("Pessoa não está vinculada a nenhuma tarefa\n");
+        return;
+    }
+
+    li_tarefa->dados[i].pessoa.codigo = -1;
+
+    printf("Pessoa removida da tarefa\n");
 }
 
 void imprime_lista_tarefa(Lista_tarefa *li_tarefa)
@@ -181,24 +228,29 @@ void imprime_lista_tarefa(Lista_tarefa *li_tarefa)
     if(li_tarefa == NULL)
     {
         printf("Não há lista de tarefas\n");
-        getchar();
         return;
     }
 
     if (li_tarefa->qtd == 0)
     {
         printf("Lista de tarefas está vazia\n");
-        getchar();
         return;
     }
     
 
     for(int i = 0; i < li_tarefa->qtd; i++)
     {
-        printf("------------------------------------------------------\n");
         printf("Código: %d\n", li_tarefa->dados[i].codigo);
         printf("Descrição: %s\n", li_tarefa->dados[i].descricao);
-    }
 
-    getchar();
+        if (li_tarefa->dados[i].pessoa.codigo > 0)
+        {
+            printf("\tPessoa responsável pela tarefa: %s\n", li_tarefa->dados[i].pessoa.nome);
+        }
+
+        if (li_tarefa->qtd > 1 && i < li_tarefa->qtd - 1)
+        {
+            printf("\n");
+        }
+    }
 }
