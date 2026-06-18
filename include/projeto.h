@@ -9,7 +9,7 @@ struct projeto
     int codigo;
     char titulo[20];
     char descricao[100];
-    struct tarefa tarefas[5];
+    Lista_tarefa *tarefas;
 };
 
 typedef struct lista_projeto Lista_projeto;
@@ -21,10 +21,12 @@ void tamanho_lista_projeto(Lista_projeto *li);
 void lista_cheia_projeto(Lista_projeto *li);
 void lista_vazia_projeto(Lista_projeto *li);
 
-void insere_lista_final_projeto(Lista_projeto *li, struct projeto t);
+void insere_lista_final_projeto(Lista_projeto *li, struct projeto p);
 
 void remove_lista_ordenada_projeto(Lista_projeto *li, int codigo);
 
-void consulta_lista_codigo_projeto(Lista_projeto *li, int codigo);
+struct projeto consulta_lista_codigo_projeto(Lista_projeto *li, int codigo);
+
+void adiciona_tarefa_projeto(Lista_projeto *li, struct tarefa t, int codigo);
 
 void imprime_lista_projeto(Lista_projeto *li);

@@ -15,9 +15,7 @@ void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas)
         printf("-----------------------------------------------------\n");
         printf("\t\t0 - Sair\n");
         printf("\t\t1 - Cadastrar pessoa\n");
-        printf("\t\t2 - Remover pessoa\n");
-        printf("\t\t3 - Consultar pessoa pelo código\n");
-        printf("\t\t4 - Imprimir lista de pessoas\n");
+        printf("\t\t2 - Imprimir lista de pessoas\n");
         printf("-----------------------------------------------------\n");
 
         printf("Digite a opção desejada: ");
@@ -53,53 +51,6 @@ void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas)
             system("clear");
 
             printf("-----------------------------------------------------\n");
-
-            printf("Digite o código da pessoa a ser removida: ");
-            scanf("%d", &codigo);
-
-            remove_lista_ordenada_pessoas(pessoas, codigo);
-            remove_pessoa_deletada_tarefa(tarefas, codigo);
-
-            printf("-----------------------------------------------------\n");
-
-            while ((c = getchar()) != '\n' && c != EOF);
-            getchar();
-
-            break;
-        case 3:
-            system("clear");
-
-            printf("-----------------------------------------------------\n");
-
-            printf("Digite o código da pessoa a ser consultada: ");
-            scanf("%d", &codigo);
-
-            printf("\n");
-            p = consulta_lista_codigo_pessoas(pessoas, codigo);
-
-            if (p.codigo == -1)
-            {
-                printf("-----------------------------------------------------\n");
-
-                while ((c = getchar()) != '\n' && c != EOF);
-                getchar();
-
-                break;
-            }
-
-            printf("Codigo: %d\n", p.codigo);
-            printf("Nome: %s\n", p.nome);
-
-            printf("-----------------------------------------------------\n");
-
-            while ((c = getchar()) != '\n' && c != EOF);
-            getchar();
-
-            break;
-        case 4:
-            system("clear");
-
-            printf("-----------------------------------------------------\n");
             imprime_lista_pessoas(pessoas);
             printf("-----------------------------------------------------\n");
 
@@ -125,7 +76,7 @@ void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas)
 
 void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas)
 {
-    int opcao = 0, codigo, c;
+    int opcao = 0, codigo, cod_pessoa, c;
     struct pessoa p;
     struct tarefa t;
 
@@ -135,11 +86,8 @@ void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas)
         printf("-----------------------------------------------------\n");
         printf("\t\t0 - Sair\n");
         printf("\t\t1 - Cadastrar tarefa\n");
-        printf("\t\t2 - Remover tarefa\n");
-        printf("\t\t3 - Consultar tarefa pelo código\n");
-        printf("\t\t4 - Imprimir lista de tarefas\n");
-        printf("\t\t5 - Adicionar resposável para uma tarefa\n");
-        printf("\t\t6 - Remover resposável para uma tarefa\n");
+        printf("\t\t2 - Imprimir lista de tarefas\n");
+        printf("\t\t3 - Adicionar resposável para uma tarefa\n");
         printf("-----------------------------------------------------\n");
 
         printf("Digite a opção desejada: ");
@@ -177,52 +125,6 @@ void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas)
             system("clear");
 
             printf("-----------------------------------------------------\n");
-
-            printf("Digite o código da tarefa a ser removida: ");
-            scanf("%d", &codigo);
-
-            remove_lista_ordenada_tarefa(tarefas, codigo);
-
-            printf("-----------------------------------------------------\n");
-
-            while ((c = getchar()) != '\n' && c != EOF);
-            getchar();
-
-            break;
-        case 3:
-            system("clear");
-
-            printf("-----------------------------------------------------\n");
-
-            printf("Digite o código da tarefa a ser consultada: ");
-            scanf("%d", &codigo);
-
-            printf("\n");
-            t = consulta_lista_codigo_tarefa(tarefas, codigo);
-
-            if (t.codigo == -1)
-            {
-                break;
-            }
-
-            printf("Codigo: %d\n", t.codigo);
-            printf("Nome: %s\n", t.descricao);
-
-            if (t.pessoa.codigo > 0)
-            {
-                printf("\tPessoa responsável pela tarefa: %s\n", t.pessoa.nome);
-            }
-
-            printf("-----------------------------------------------------\n");
-
-            while ((c = getchar()) != '\n' && c != EOF);
-            getchar();
-
-            break;
-        case 4:
-            system("clear");
-
-            printf("-----------------------------------------------------\n");
             imprime_lista_tarefa(tarefas);
             printf("-----------------------------------------------------\n");
 
@@ -230,7 +132,7 @@ void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas)
             getchar();
 
             break;
-        case 5:
+        case 3:
             system("clear");
 
             printf("-----------------------------------------------------\n");
@@ -248,9 +150,9 @@ void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas)
             }
 
             printf("Digite o código da pessoa a ser adicionada: ");
-            scanf("%d", &codigo);
+            scanf("%d", &cod_pessoa);
             
-            p = consulta_lista_codigo_pessoas(pessoas, codigo);
+            p = consulta_lista_codigo_pessoas(pessoas, cod_pessoa);
 
             if (p.codigo == -1)
             {
@@ -261,22 +163,6 @@ void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas)
 
             adiciona_pessoa_tarefa(tarefas, p, codigo);
             printf("Pessoa adicionada á tarefa\n");
-
-            printf("-----------------------------------------------------\n");
-
-            while ((c = getchar()) != '\n' && c != EOF);
-            getchar();
-
-            break;
-        case 6:
-            system("clear");
-
-            printf("-----------------------------------------------------\n");
-
-            printf("Digite o código da tarefa: ");
-            scanf("%d", &codigo);
-
-            remove_pessoa_tarefa(tarefas, codigo);
 
             printf("-----------------------------------------------------\n");
 
@@ -297,7 +183,122 @@ void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas)
             break;
         }
     } while (opcao != 0);
-    
+}
+
+void menu_projetos(Lista_projeto *projetos, Lista_tarefa *tarefas)
+{
+    int opcao = 0, codigo, cod_tarefa, c;
+    struct projeto p;
+    struct tarefa t;
+    Lista_tarefa *tarefas_projeto = cria_lista_tarefa();
+
+    do
+    {
+        system("clear");
+        printf("-----------------------------------------------------\n");
+        printf("\t\t0 - Sair\n");
+        printf("\t\t1 - Cadastrar projeto\n");
+        printf("\t\t2 - Imprimir lista de projetos\n");
+        printf("\t\t3 - Adicionar tarefa ao projeto\n");
+        printf("-----------------------------------------------------\n");
+
+        printf("Digite a opção desejada: ");
+        scanf("%d", &opcao);
+
+        switch (opcao)
+        {
+        case 0:
+            break;
+        case 1:
+            system("clear");
+
+            printf("-----------------------------------------------------\n");
+
+            printf("Digite o código do projeto: ");
+            scanf("%d", &p.codigo);
+            printf("\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            printf("Digite o titulo do projeto: ");
+            scanf("%19[^\n]", p.titulo);
+            printf("\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            printf("Digite a descricao do projeto: ");
+            scanf("%99[^\n]", p.descricao);
+            printf("\n");
+
+            p.tarefas = tarefas_projeto;
+
+            insere_lista_final_projeto(projetos, p);
+
+            printf("-----------------------------------------------------\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            getchar();
+
+            break;
+        case 2:
+            system("clear");
+
+            printf("-----------------------------------------------------\n");
+            imprime_lista_projeto(projetos);
+            printf("-----------------------------------------------------\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            getchar();
+
+            break;
+        case 3:
+            system("clear");
+
+            printf("-----------------------------------------------------\n");
+
+            printf("Digite o código do projeto: ");
+            scanf("%d", &codigo);
+
+            p = consulta_lista_codigo_projeto(projetos, codigo);
+
+            if (p.codigo == -1)
+            {
+                while ((c = getchar()) != '\n' && c != EOF);
+                getchar();
+                break;
+            }
+
+            printf("Digite o código da tarefa a ser adicionada: ");
+            scanf("%d", &codigo);
+            
+            t = consulta_lista_codigo_tarefa(tarefas, codigo);
+
+            if (t.codigo == -1)
+            {
+                while ((c = getchar()) != '\n' && c != EOF);
+                getchar();
+                break;
+            }
+
+            adiciona_tarefa_projeto(projetos, t, codigo);
+
+            printf("-----------------------------------------------------\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            getchar();
+
+            break;
+        default:
+            system("clear");
+
+            printf("-----------------------------------------------------\n");
+            printf("opção inválida");
+            printf("-----------------------------------------------------\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            getchar();
+
+            break;
+        }
+    } while (opcao != 0);
 }
 
 int main(int argc, char const *argv[])
@@ -305,6 +306,7 @@ int main(int argc, char const *argv[])
     int opcao = 0, c;
     Lista_pessoa *pessoas = cria_lista_pessoas();
     Lista_tarefa *tarefas = cria_lista_tarefa();
+    Lista_projeto *projetos = cria_lista_projeto();
 
     do
     {
@@ -326,8 +328,7 @@ int main(int argc, char const *argv[])
         case 0:
             break;
         case 1:
-            printf("projetos\n");
-            getchar();
+            menu_projetos(projetos, tarefas);
             break;
         case 2:
             menu_tarefas(tarefas, pessoas);

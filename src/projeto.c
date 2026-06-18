@@ -23,6 +23,7 @@ Lista_projeto *cria_lista_projeto()
 
 void libera_lista_projeto(Lista_projeto *li)
 {
+    free(li->dados->tarefas);
     free(li);
 }
 
@@ -87,23 +88,25 @@ void insere_lista_final_projeto(Lista_projeto *li, struct projeto p)
     if(li == NULL)
     {
         printf("Não há lista de projetos\n");
-        getchar();
         return;
     }
 
     if(li->qtd == MAX_PROJETO)
     {
         printf("Lista de projetos está cheia para inserção\n");
-        getchar();
         return;
     }
+
+    if (p.codigo <= 0)
+    {
+        printf("Código deve ser um valor positivo maior que 0\n");
+        return;
+    } 
 
     li->dados[li->qtd] = p;
     li->qtd++;
 
     printf("Projeto cadastrado com sucesso\n");
-
-    getchar();
 }
 
 void remove_lista_ordenada_projeto(Lista_projeto *li, int codigo)
@@ -111,14 +114,12 @@ void remove_lista_ordenada_projeto(Lista_projeto *li, int codigo)
     if(li == NULL)
     {
         printf("Não há lista de projetos\n");
-        getchar();
         return;
     }
 
     if(li->qtd == 0)
     {
         printf("Lista de projetos está vazia\n");
-        getchar();
         return;
     }
 
@@ -131,7 +132,6 @@ void remove_lista_ordenada_projeto(Lista_projeto *li, int codigo)
     if(i == li->qtd)
     {
         printf("Projeto não encontrado para remoção\n");
-        getchar();
         return;
     }
 
@@ -143,17 +143,14 @@ void remove_lista_ordenada_projeto(Lista_projeto *li, int codigo)
     li->qtd--;
 
     printf("Projeto removido com sucesso\n");
-
-    getchar();
 }
 
-void consulta_lista_codigo_projeto(Lista_projeto *li, int codigo)
+struct projeto consulta_lista_codigo_projeto(Lista_projeto *li, int codigo)
 {
     if(li == NULL)
     {
         printf("Não há lista de projetos\n");
-        getchar();
-        return;
+        return (struct projeto){-1};
     }
 
     int i = 0;
@@ -165,15 +162,19 @@ void consulta_lista_codigo_projeto(Lista_projeto *li, int codigo)
     if(i == li->qtd)
     {
         printf("projeto não encontrada\n");
-        getchar();
-        return;
+        return (struct projeto){-1};
+    }
+}
+
+void adiciona_tarefa_projeto(Lista_projeto *li, struct tarefa t, int codigo)
+{
+    int i = 0;
+    while(i < li->qtd && li->dados[i].codigo != codigo)
+    {
+        i++;
     }
 
-    printf("Código: %d\n", li->dados[i].codigo);
-    printf("Descrição: %s\n", li->dados[i].descricao);
-    
-
-    getchar();
+    insere_lista_final_tarefa(li->dados[i].tarefas, t);
 }
 
 void imprime_lista_projeto(Lista_projeto *li)
@@ -181,23 +182,23 @@ void imprime_lista_projeto(Lista_projeto *li)
     if(li == NULL)
     {
         printf("Não há lista de projetos\n");
-        getchar();
         return;
     }
 
     if (li->qtd == 0)
     {
         printf("Lista de projetos está vazia\n");
-        getchar();
         return;
     }
 
     for(int i = 0; i < li->qtd; i++)
     {
-        printf("------------------------------------------------------\n");
         printf("Código: %d\n", li->dados[i].codigo);
+        printf("Título: %s\n", li->dados[i].descricao);
         printf("Descrição: %s\n", li->dados[i].descricao);
-    }
 
-    getchar();
+        printf("\n-----Tarefas-----\n");
+        imprime_lista_tarefa(li->dados[i].tarefas);
+        printf("-----------------\n");
+    }
 }

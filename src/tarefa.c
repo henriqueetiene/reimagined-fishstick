@@ -245,7 +245,7 @@ void imprime_lista_tarefa(Lista_tarefa *li_tarefa)
 
         if (li_tarefa->dados[i].pessoa.codigo > 0)
         {
-            printf("\tPessoa responsável pela tarefa: %s\n", li_tarefa->dados[i].pessoa.nome);
+            printf("Pessoa responsável pela tarefa: %s\n", li_tarefa->dados[i].pessoa.nome);
         }
 
         if (li_tarefa->qtd > 1 && i < li_tarefa->qtd - 1)
