@@ -8,6 +8,7 @@ void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas)
 {
     int opcao = 0, codigo, c;
     struct pessoa p;
+    char nome[30];
 
     do
     {
@@ -16,6 +17,7 @@ void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas)
         printf("\t\t0 - Sair\n");
         printf("\t\t1 - Cadastrar pessoa\n");
         printf("\t\t2 - Imprimir lista de pessoas\n");
+        printf("\t\t3 - Atualizar nome de uma pessoa\n");
         printf("-----------------------------------------------------\n");
 
         printf("Digite a opção desejada: ");
@@ -52,6 +54,30 @@ void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas)
 
             printf("-----------------------------------------------------\n");
             imprime_lista_pessoas(pessoas);
+            printf("-----------------------------------------------------\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            getchar();
+
+            break;
+        case 3:
+            system("clear");
+
+            printf("-----------------------------------------------------\n");
+
+            printf("Digite o código da pessoa: ");
+            scanf("%d", &codigo);
+            printf("\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            printf("Digite o novo nome da pessoa: ");
+            scanf("%29[^\n]", nome);
+            printf("\n");
+
+            atualiza_nome_pessoa(pessoas, codigo, nome);
+
+            printf("Nome atualizado\n");
+
             printf("-----------------------------------------------------\n");
 
             while ((c = getchar()) != '\n' && c != EOF);

@@ -212,3 +212,29 @@ void imprime_lista_pessoas(Lista_pessoa *li)
         }
     }
 }
+
+void atualiza_nome_pessoa(Lista_pessoa *li, int cod, char novo_nome[30])
+{
+    if(li == NULL)
+    {
+        printf("Não há lista de pessoas\n");
+        return;
+    }
+
+    int i = 0;
+    while(i < li->qtd && li->dados[i].codigo != cod)
+    {
+        i++;
+    }
+
+    if(i == li->qtd)
+    {
+        printf("Pessoa não encontrada\n");
+        return;
+    }
+
+    for (int k = 0; k < 30; k++)
+    {
+        li->dados[i].nome[k] = novo_nome[k];
+    }
+}
