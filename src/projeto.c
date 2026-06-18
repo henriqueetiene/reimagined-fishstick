@@ -236,3 +236,17 @@ void atualiza_titulo_projeto(Lista_projeto *li, int codigo, char novo_titulo[20]
         }
     }
 }
+
+void atualiza_descricao_projeto(Lista_projeto *li, int codigo, char nova_descricao[100])
+{
+    for (int i = 0; i < MAX_PROJETO; i++)
+    {
+        if (li->dados[i].codigo == codigo)
+        {
+            for (int k = 0; k < 20; k++)
+            {
+                li->dados[i].descricao[k] = nova_descricao[k];
+            }
+        }
+    }
+}

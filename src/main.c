@@ -245,7 +245,7 @@ void menu_projetos(Lista_projeto *projetos, Lista_tarefa *tarefas)
     struct projeto p;
     struct tarefa t;
     Lista_tarefa *tarefas_projeto = cria_lista_tarefa();
-    char titulo[20];
+    char titulo[20], descricao[100];
 
     do
     {
@@ -256,6 +256,7 @@ void menu_projetos(Lista_projeto *projetos, Lista_tarefa *tarefas)
         printf("\t\t2 - Imprimir lista de projetos\n");
         printf("\t\t3 - Adicionar tarefa ao projeto\n");
         printf("\t\t4 - Atualizar titulo de um projeto\n");
+        printf("\t\t5 - Atualizar descrição de um projeto\n");
         printf("-----------------------------------------------------\n");
 
         printf("Digite a opção desejada: ");
@@ -359,6 +360,30 @@ void menu_projetos(Lista_projeto *projetos, Lista_tarefa *tarefas)
             atualiza_titulo_projeto(projetos, codigo, titulo);
 
             printf("Titulo atualizado\n");
+
+            printf("-----------------------------------------------------\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            getchar();
+
+            break;
+        case 5:
+            system("clear");
+
+            printf("-----------------------------------------------------\n");
+
+            printf("Digite o código do projeto: ");
+            scanf("%d", &codigo);
+            printf("\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            printf("Digite a nova descrição do projeto: ");
+            scanf("%99[^\n]", descricao);
+            printf("\n");
+
+            atualiza_descricao_projeto(projetos, codigo, descricao);
+
+            printf("Descrição atualizada\n");
 
             printf("-----------------------------------------------------\n");
 

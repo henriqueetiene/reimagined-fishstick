@@ -35,3 +35,4 @@ void atualiza_nome_pessoa_lista_projetos(Lista_projeto *li, int cod_pessoa, char
 void atualiza_descricao_tarefa_lista_projetos(Lista_projeto *li, int cod_tarefa, char nova_descricao[100]);
 
 void atualiza_titulo_projeto(Lista_projeto *li, int codigo, char novo_titulo[20]);
+void atualiza_descricao_projeto(Lista_projeto *li, int codigo, char nova_descricao[100]);
