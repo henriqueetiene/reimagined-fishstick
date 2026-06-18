@@ -273,3 +273,22 @@ void atualiza_nome_pessoa_lista_tarefas(Lista_tarefa *li_tarefa, int cod_pessoa,
         }
     }
 }
+
+void atualiza_descricao_tarefa_lista_tarefas(Lista_tarefa *li_tarefa, int cod_tarefa, char nova_descricao[100])
+{
+    if(li_tarefa == NULL)
+    {
+        return;
+    }
+
+    for (int i = 0; i < MAX_TAREFA; i++)
+    {
+        if (li_tarefa->dados[i].codigo == cod_tarefa)
+        {
+            for (int k = 0; k < 30; k++)
+            {
+                li_tarefa->dados[i].descricao[k] = nova_descricao[k];
+            }
+        }
+    }
+}

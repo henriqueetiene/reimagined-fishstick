@@ -32,3 +32,4 @@ void adiciona_tarefa_projeto(Lista_projeto *li, struct tarefa t, int codigo);
 void imprime_lista_projeto(Lista_projeto *li);
 
 void atualiza_nome_pessoa_lista_projetos(Lista_projeto *li, int cod_pessoa, char novo_nome[30]);
+void atualiza_descricao_tarefa_lista_projetos(Lista_projeto *li, int cod_tarefa, char nova_descricao[100]);

@@ -214,3 +214,11 @@ void atualiza_nome_pessoa_lista_projetos(Lista_projeto *li, int cod_pessoa, char
         }
     }
 }
+
+void atualiza_descricao_tarefa_lista_projetos(Lista_projeto *li, int cod_tarefa, char nova_descricao[100])
+{
+    for (int i = 0; i < MAX_PROJETO; i++)
+    {
+        atualiza_descricao_tarefa_lista_tarefas(li->dados[i].tarefas, cod_tarefa, nova_descricao);
+    }
+}

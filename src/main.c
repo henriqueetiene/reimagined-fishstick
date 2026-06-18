@@ -101,11 +101,12 @@ void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas, Lista_projeto *p
     } while (opcao != 0);
 }
 
-void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas)
+void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas, Lista_projeto *projetos)
 {
     int opcao = 0, codigo, cod_pessoa, c;
     struct pessoa p;
     struct tarefa t;
+    char descricao[100];
 
     do
     {
@@ -115,6 +116,7 @@ void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas)
         printf("\t\t1 - Cadastrar tarefa\n");
         printf("\t\t2 - Imprimir lista de tarefas\n");
         printf("\t\t3 - Adicionar resposável para uma tarefa\n");
+        printf("\t\t4 - Atualizada descrição de uma tarefa\n");
         printf("-----------------------------------------------------\n");
 
         printf("Digite a opção desejada: ");
@@ -190,6 +192,31 @@ void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas)
 
             adiciona_pessoa_tarefa(tarefas, p, codigo);
             printf("Pessoa adicionada á tarefa\n");
+
+            printf("-----------------------------------------------------\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            getchar();
+
+            break;
+        case 4:
+            system("clear");
+
+            printf("-----------------------------------------------------\n");
+
+            printf("Digite o código da tarefa: ");
+            scanf("%d", &codigo);
+            printf("\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            printf("Digite a nova descrição da tarefa: ");
+            scanf("%99[^\n]", descricao);
+            printf("\n");
+
+            atualiza_descricao_tarefa_lista_tarefas(tarefas, codigo, descricao);
+            atualiza_descricao_tarefa_lista_projetos(projetos, codigo, descricao);
+
+            printf("Descrição atualizada\n");
 
             printf("-----------------------------------------------------\n");
 
@@ -358,7 +385,7 @@ int main(int argc, char const *argv[])
             menu_projetos(projetos, tarefas);
             break;
         case 2:
-            menu_tarefas(tarefas, pessoas);
+            menu_tarefas(tarefas, pessoas, projetos);
             break;
         case 3:
             menu_pessoas(pessoas, tarefas, projetos);
