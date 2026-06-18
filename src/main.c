@@ -76,6 +76,7 @@ void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas, Lista_projeto *p
 
             atualiza_nome_pessoa_lista_pessoas(pessoas, codigo, nome);
             atualiza_nome_pessoa_lista_tarefas(tarefas, codigo, nome);
+            atualiza_nome_pessoa_lista_projetos(projetos, codigo, nome);
 
             printf("Nome atualizado\n");
 
@@ -98,7 +99,6 @@ void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas, Lista_projeto *p
             break;
         }
     } while (opcao != 0);
-    
 }
 
 void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas)

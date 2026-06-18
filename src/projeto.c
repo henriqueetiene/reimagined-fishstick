@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <projeto.h>
+#include "tarefa.h"
 
 struct lista_projeto
 {
@@ -200,5 +201,16 @@ void imprime_lista_projeto(Lista_projeto *li)
         printf("\n-----Tarefas-----\n");
         imprime_lista_tarefa(li->dados[i].tarefas);
         printf("-----------------\n");
+    }
+}
+
+void atualiza_nome_pessoa_lista_projetos(Lista_projeto *li, int cod_pessoa, char novo_nome[30])
+{
+    for (int i = 0; i < MAX_PROJETO; i++)
+    {
+        for (int k = 0; k < MAX_TAREFA; k++)
+        {
+            atualiza_nome_pessoa_lista_tarefas(li->dados[i].tarefas, cod_pessoa, novo_nome);
+        }
     }
 }
