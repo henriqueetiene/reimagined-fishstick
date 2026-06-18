@@ -26,4 +26,4 @@ void consulta_lista_nome_pessoas(Lista_pessoa *li, char *nome);
 
 void imprime_lista_pessoas(Lista_pessoa *li);
 
-void atualiza_nome_pessoa(Lista_pessoa *li, int cod, char novo_nome[30]);
+void atualiza_nome_pessoa_lista_pessoas(Lista_pessoa *li, int cod, char novo_nome[30]);

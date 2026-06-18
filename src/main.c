@@ -4,7 +4,7 @@
 #include "projeto.h"
 #include "tarefa.h"
 
-void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas)
+void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas, Lista_projeto *projetos)
 {
     int opcao = 0, codigo, c;
     struct pessoa p;
@@ -74,7 +74,8 @@ void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas)
             scanf("%29[^\n]", nome);
             printf("\n");
 
-            atualiza_nome_pessoa(pessoas, codigo, nome);
+            atualiza_nome_pessoa_lista_pessoas(pessoas, codigo, nome);
+            atualiza_nome_pessoa_lista_tarefas(tarefas, codigo, nome);
 
             printf("Nome atualizado\n");
 
@@ -360,7 +361,7 @@ int main(int argc, char const *argv[])
             menu_tarefas(tarefas, pessoas);
             break;
         case 3:
-            menu_pessoas(pessoas, tarefas);
+            menu_pessoas(pessoas, tarefas, projetos);
             break;
         default:
             printf("opção inválida\n");

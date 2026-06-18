@@ -254,3 +254,28 @@ void imprime_lista_tarefa(Lista_tarefa *li_tarefa)
         }
     }
 }
+
+void atualiza_nome_pessoa_lista_tarefas(Lista_tarefa *li_tarefa, int cod_pessoa, char novo_nome[30])
+{
+    if(li_tarefa == NULL)
+    {
+        printf("Não há lista de tarefas\n");
+        return;
+    }
+
+    int i = 0;
+    while(i < li_tarefa->qtd && li_tarefa->dados[i].pessoa.codigo != cod_pessoa)
+    {
+        i++;
+    }
+
+    if(i == li_tarefa->qtd)
+    {
+        return;
+    }
+
+    for (int k = 0; k < 30; k++)
+    {
+        li_tarefa->dados[i].pessoa.nome[k] = novo_nome[k];
+    }
+}

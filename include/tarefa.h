@@ -31,3 +31,5 @@ void remove_pessoa_tarefa(Lista_tarefa *li_tarefa, int codigo);
 void remove_pessoa_deletada_tarefa(Lista_tarefa *li_tarefa, int cod_pessoa);
 
 void imprime_lista_tarefa(Lista_tarefa *li);
+
+void atualiza_nome_pessoa_lista_tarefas(Lista_tarefa *li_tarefa, int cod_pessoa, char novo_nome[30]);
