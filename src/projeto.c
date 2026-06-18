@@ -195,7 +195,7 @@ void imprime_lista_projeto(Lista_projeto *li)
     for(int i = 0; i < li->qtd; i++)
     {
         printf("Código: %d\n", li->dados[i].codigo);
-        printf("Título: %s\n", li->dados[i].descricao);
+        printf("Título: %s\n", li->dados[i].titulo);
         printf("Descrição: %s\n", li->dados[i].descricao);
 
         printf("\n-----Tarefas-----\n");
@@ -220,5 +220,19 @@ void atualiza_descricao_tarefa_lista_projetos(Lista_projeto *li, int cod_tarefa,
     for (int i = 0; i < MAX_PROJETO; i++)
     {
         atualiza_descricao_tarefa_lista_tarefas(li->dados[i].tarefas, cod_tarefa, nova_descricao);
+    }
+}
+
+void atualiza_titulo_projeto(Lista_projeto *li, int codigo, char novo_titulo[20])
+{
+    for (int i = 0; i < MAX_PROJETO; i++)
+    {
+        if (li->dados[i].codigo == codigo)
+        {
+            for (int k = 0; k < 20; k++)
+            {
+                li->dados[i].titulo[k] = novo_titulo[k];
+            }
+        }
     }
 }

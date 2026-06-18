@@ -245,6 +245,7 @@ void menu_projetos(Lista_projeto *projetos, Lista_tarefa *tarefas)
     struct projeto p;
     struct tarefa t;
     Lista_tarefa *tarefas_projeto = cria_lista_tarefa();
+    char titulo[20];
 
     do
     {
@@ -254,6 +255,7 @@ void menu_projetos(Lista_projeto *projetos, Lista_tarefa *tarefas)
         printf("\t\t1 - Cadastrar projeto\n");
         printf("\t\t2 - Imprimir lista de projetos\n");
         printf("\t\t3 - Adicionar tarefa ao projeto\n");
+        printf("\t\t4 - Atualizar titulo de um projeto\n");
         printf("-----------------------------------------------------\n");
 
         printf("Digite a opção desejada: ");
@@ -333,6 +335,30 @@ void menu_projetos(Lista_projeto *projetos, Lista_tarefa *tarefas)
             }
 
             adiciona_tarefa_projeto(projetos, t, codigo);
+
+            printf("-----------------------------------------------------\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            getchar();
+
+            break;
+        case 4:
+            system("clear");
+
+            printf("-----------------------------------------------------\n");
+
+            printf("Digite o código do projeto: ");
+            scanf("%d", &codigo);
+            printf("\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            printf("Digite o novo titulo do projeto: ");
+            scanf("%19[^\n]", titulo);
+            printf("\n");
+
+            atualiza_titulo_projeto(projetos, codigo, titulo);
+
+            printf("Titulo atualizado\n");
 
             printf("-----------------------------------------------------\n");
 
