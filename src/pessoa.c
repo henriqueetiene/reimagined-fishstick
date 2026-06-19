@@ -235,7 +235,6 @@ void imprime_lista_pessoas(Lista_pessoa *li)
             {
                 printf("\n");
             }
-            
         }
         printf("---------------------\n");
 
