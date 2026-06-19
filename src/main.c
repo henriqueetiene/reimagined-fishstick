@@ -291,6 +291,7 @@ void menu_projetos(Lista_projeto *projetos, Lista_tarefa *tarefas)
         printf("\t\t3 - Adicionar tarefa ao projeto\n");
         printf("\t\t4 - Atualizar titulo de um projeto\n");
         printf("\t\t5 - Atualizar descrição de um projeto\n");
+        printf("\t\t6 - Imprimir histórico de um projeto\n");
         printf("-----------------------------------------------------\n");
 
         printf("Digite a opção desejada: ");
@@ -418,6 +419,23 @@ void menu_projetos(Lista_projeto *projetos, Lista_tarefa *tarefas)
             atualiza_descricao_projeto(projetos, codigo, descricao);
 
             printf("Descrição atualizada\n");
+
+            printf("-----------------------------------------------------\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            getchar();
+
+            break;
+        case 6:
+            system("clear");
+
+            printf("-----------------------------------------------------\n");
+
+            printf("Digite o código do projeto: ");
+            scanf("%d", &codigo);
+            printf("\n");
+
+            imprime_historico_projeto(projetos, codigo);
 
             printf("-----------------------------------------------------\n");
 

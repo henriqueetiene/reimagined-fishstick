@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <projeto.h>
+#include <string.h>
+#include "projeto.h"
 #include "tarefa.h"
 
 struct lista_projeto
@@ -104,6 +105,10 @@ void insere_lista_final_projeto(Lista_projeto *li, struct projeto p)
         return;
     } 
 
+    strcpy(p.h[0].ocorrencia, "Cadastro");
+    obtem_data_atual(p.h[0].data);
+    p.qtd_historico = 1;
+
     li->dados[li->qtd] = p;
     li->qtd++;
 
@@ -175,6 +180,10 @@ void adiciona_tarefa_projeto(Lista_projeto *li, struct tarefa t, int codigo)
         i++;
     }
 
+    strcpy(li->dados[i].h[li->dados[i].qtd_historico].ocorrencia, "Adicionou uma tarefa");
+    obtem_data_atual(li->dados[i].h[li->dados[i].qtd_historico].data);
+    li->dados[i].qtd_historico++;
+
     insere_lista_final_tarefa(li->dados[i].tarefas, t);
 }
 
@@ -204,6 +213,38 @@ void imprime_lista_projeto(Lista_projeto *li)
     }
 }
 
+void imprime_historico_projeto(Lista_projeto *li, int codigo)
+{
+    if(li == NULL)
+    {
+        printf("Não há lista de projetos\n");
+        return;
+    }
+
+    int i = 0;
+    while(i < li->qtd && li->dados[i].codigo != codigo)
+    {
+        i++;
+    }
+
+    if(i == li->qtd)
+    {
+        printf("Projeto não encontrada\n");
+        return;
+    }
+
+    for (int k = 0; k < li->dados[i].qtd_historico; k++)
+    {
+        printf("Evento: %s\n", li->dados[i].h[k].ocorrencia);
+        printf("Data: %s\n", li->dados[i].h[k].data);
+
+        if (li->dados[i].qtd_historico > 1 && k < li->dados[i].qtd_historico - 1)
+        {
+            printf("\n");
+        }
+    }
+}
+
 void atualiza_nome_pessoa_lista_projetos(Lista_projeto *li, int cod_pessoa, char novo_nome[30])
 {
     for (int i = 0; i < MAX_PROJETO; i++)
@@ -229,6 +270,10 @@ void atualiza_titulo_projeto(Lista_projeto *li, int codigo, char novo_titulo[20]
     {
         if (li->dados[i].codigo == codigo)
         {
+            strcpy(li->dados[i].h[li->dados[i].qtd_historico].ocorrencia, "Atualizou título");
+            obtem_data_atual(li->dados[i].h[li->dados[i].qtd_historico].data);
+            li->dados[i].qtd_historico++;
+
             for (int k = 0; k < 20; k++)
             {
                 li->dados[i].titulo[k] = novo_titulo[k];
@@ -243,6 +288,9 @@ void atualiza_descricao_projeto(Lista_projeto *li, int codigo, char nova_descric
     {
         if (li->dados[i].codigo == codigo)
         {
+            strcpy(li->dados[i].h[li->dados[i].qtd_historico].ocorrencia, "Atualizou descrição");
+            obtem_data_atual(li->dados[i].h[li->dados[i].qtd_historico].data);
+            li->dados[i].qtd_historico++;
             for (int k = 0; k < 20; k++)
             {
                 li->dados[i].descricao[k] = nova_descricao[k];
