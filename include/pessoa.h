@@ -4,7 +4,7 @@
 
 struct historico
 {
-    char ocorrencia[20];
+    char ocorrencia[50];
     char data[80];
 };
 
@@ -35,3 +35,5 @@ void consulta_lista_nome_pessoas(Lista_pessoa *li, char *nome);
 void imprime_lista_pessoas(Lista_pessoa *li);
 
 void atualiza_nome_pessoa_lista_pessoas(Lista_pessoa *li, int cod, char novo_nome[30]);
+
+void obtem_data_atual(char *data);

@@ -117,6 +117,7 @@ void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas, Lista_projeto *p
         printf("\t\t2 - Imprimir lista de tarefas\n");
         printf("\t\t3 - Adicionar resposável para uma tarefa\n");
         printf("\t\t4 - Atualizada descrição de uma tarefa\n");
+        printf("\t\t5 - Imprimir histórico de uma tarefa\n");
         printf("-----------------------------------------------------\n");
 
         printf("Digite a opção desejada: ");
@@ -217,6 +218,23 @@ void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas, Lista_projeto *p
             atualiza_descricao_tarefa_lista_projetos(projetos, codigo, descricao);
 
             printf("Descrição atualizada\n");
+
+            printf("-----------------------------------------------------\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            getchar();
+
+            break;
+        case 5:
+            system("clear");
+
+            printf("-----------------------------------------------------\n");
+
+            printf("Digite o código da tarefa: ");
+            scanf("%d", &codigo);
+            printf("\n");
+
+            imprime_historico_tarefa(tarefas, codigo);
 
             printf("-----------------------------------------------------\n");
 
