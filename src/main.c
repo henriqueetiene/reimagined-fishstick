@@ -18,6 +18,7 @@ void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas, Lista_projeto *p
         printf("\t\t1 - Cadastrar pessoa\n");
         printf("\t\t2 - Imprimir lista de pessoas\n");
         printf("\t\t3 - Atualizar nome de uma pessoa\n");
+        printf("\t\t4 - Imprimir histórico de uma pessoa\n");
         printf("-----------------------------------------------------\n");
 
         printf("Digite a opção desejada: ");
@@ -78,7 +79,22 @@ void menu_pessoas(Lista_pessoa *pessoas, Lista_tarefa *tarefas, Lista_projeto *p
             atualiza_nome_pessoa_lista_tarefas(tarefas, codigo, nome);
             atualiza_nome_pessoa_lista_projetos(projetos, codigo, nome);
 
-            printf("Nome atualizado\n");
+            printf("-----------------------------------------------------\n");
+
+            while ((c = getchar()) != '\n' && c != EOF);
+            getchar();
+
+            break;
+        case 4:
+            system("clear");
+
+            printf("-----------------------------------------------------\n");
+
+            printf("Digite o código da pessoa: ");
+            scanf("%d", &codigo);
+            printf("\n");
+
+            imprime_historico_pessoa(pessoas, codigo);
 
             printf("-----------------------------------------------------\n");
 
@@ -116,7 +132,7 @@ void menu_tarefas(Lista_tarefa *tarefas, Lista_pessoa *pessoas, Lista_projeto *p
         printf("\t\t1 - Cadastrar tarefa\n");
         printf("\t\t2 - Imprimir lista de tarefas\n");
         printf("\t\t3 - Adicionar resposável para uma tarefa\n");
-        printf("\t\t4 - Atualizada descrição de uma tarefa\n");
+        printf("\t\t4 - Atualizar descrição de uma tarefa\n");
         printf("\t\t5 - Imprimir histórico de uma tarefa\n");
         printf("-----------------------------------------------------\n");
 

@@ -225,22 +225,41 @@ void imprime_lista_pessoas(Lista_pessoa *li)
         printf("Código: %d\n",li->dados[i].codigo);
         printf("Nome: %s\n",li->dados[i].nome);
 
-        printf("\n-----Histórico-----\n");
-        for (int k = 0; k < li->dados[i].qtd_historico; k++)
-        {
-            printf("%s\n", li->dados[i].h[k].ocorrencia);
-            printf("%s\n", li->dados[i].h[k].data);
-
-            if (li->dados[i].qtd_historico > 1 && k < li->dados[i].qtd_historico - 1)
-            {
-                printf("\n");
-            }
-        }
-        printf("---------------------\n");
-
         if (li->qtd > 1 && i < li->qtd - 1)
         {
             printf("==================================\n");
+            printf("\n");
+        }
+    }
+}
+
+void imprime_historico_pessoa(Lista_pessoa *li, int codigo)
+{
+    if(li == NULL)
+    {
+        printf("Não há lista de pessoas\n");
+        return;
+    }
+
+    int i = 0;
+    while(i < li->qtd && li->dados[i].codigo != codigo)
+    {
+        i++;
+    }
+
+    if(i == li->qtd)
+    {
+        printf("Pessoa não encontrada\n");
+        return;
+    }
+
+    for (int k = 0; k < li->dados[i].qtd_historico; k++)
+    {
+        printf("Evento: %s\n", li->dados[i].h[k].ocorrencia);
+        printf("Data: %s\n", li->dados[i].h[k].data);
+
+        if (li->dados[i].qtd_historico > 1 && k < li->dados[i].qtd_historico - 1)
+        {
             printf("\n");
         }
     }

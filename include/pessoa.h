@@ -33,6 +33,7 @@ struct pessoa consulta_lista_codigo_pessoas(Lista_pessoa *li, int cod);
 void consulta_lista_nome_pessoas(Lista_pessoa *li, char *nome);
 
 void imprime_lista_pessoas(Lista_pessoa *li);
+void imprime_historico_pessoa(Lista_pessoa *li, int codigo);
 
 void atualiza_nome_pessoa_lista_pessoas(Lista_pessoa *li, int cod, char novo_nome[30]);
 
