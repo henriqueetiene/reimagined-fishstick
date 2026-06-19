@@ -447,6 +447,10 @@ int main(int argc, char const *argv[])
             break;
         }
     } while (opcao != 0);
-    
+
+    libera_lista_pessoas(pessoas);
+    libera_lista_tarefa(tarefas);
+    libera_lista_projeto(projetos);
+
     return 0;
 }

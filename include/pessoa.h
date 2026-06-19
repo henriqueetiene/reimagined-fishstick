@@ -2,10 +2,18 @@
 
 #define MAX_PESSOA 2
 
+struct historico
+{
+    char ocorrencia[20];
+    char data[80];
+};
+
 struct pessoa
 {
     int codigo;
     char nome[30];
+    struct historico h[20];
+    int qtd_historico;
 };
 
 typedef struct lista_pessoa Lista_pessoa;

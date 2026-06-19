@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include "pessoa.h"
 
 struct lista_pessoa
@@ -8,6 +9,18 @@ struct lista_pessoa
     int qtd;
     struct pessoa dados[MAX_PESSOA];
 };
+
+void obtem_data_atual(char *data)
+{
+    time_t raw_time;
+    struct tm *local_time;
+
+    time(&raw_time);
+
+    local_time = localtime(&raw_time);
+
+    strftime(data, 80, "%Y-%m-%d %H:%M:%S", local_time);
+}
 
 Lista_pessoa *cria_lista_pessoas()
 {
@@ -78,6 +91,9 @@ void lista_vazia_pessoas(Lista_pessoa *li)
 
 void insere_lista_final_pessoas(Lista_pessoa *li, struct pessoa p)
 {
+    char data[80];
+    obtem_data_atual(data);
+
     if(li == NULL)
     {
         printf("Não há lista de pessoas\n");
@@ -95,6 +111,10 @@ void insere_lista_final_pessoas(Lista_pessoa *li, struct pessoa p)
         printf("Código deve ser um valor positivo maior que 0\n");
         return;
     }
+
+    strcpy(p.h[0].ocorrencia, "Cadastro");
+    strcpy(p.h[0].data, data);
+    p.qtd_historico = 1;
 
     li->dados[li->qtd] = p;
     li->qtd++;
@@ -200,14 +220,28 @@ void imprime_lista_pessoas(Lista_pessoa *li)
         return;
     }
 
-
     for(int i = 0; i < li->qtd; i++)
     {
-        printf("codigo: %d\n",li->dados[i].codigo);
-        printf("nome: %s\n",li->dados[i].nome);
+        printf("Código: %d\n",li->dados[i].codigo);
+        printf("Nome: %s\n",li->dados[i].nome);
+
+        printf("\n-----Histórico-----\n");
+        for (int k = 0; k < li->dados[i].qtd_historico; k++)
+        {
+            printf("%s\n", li->dados[i].h[k].ocorrencia);
+            printf("%s\n", li->dados[i].h[k].data);
+
+            if (li->dados[i].qtd_historico > 1 && k < li->dados[i].qtd_historico - 1)
+            {
+                printf("\n");
+            }
+            
+        }
+        printf("---------------------\n");
 
         if (li->qtd > 1 && i < li->qtd - 1)
         {
+            printf("==================================\n");
             printf("\n");
         }
     }
@@ -233,8 +267,18 @@ void atualiza_nome_pessoa_lista_pessoas(Lista_pessoa *li, int cod, char novo_nom
         return;
     }
 
+    char nome_antigo[30];
+    for (int k = 0; k < 30; k++)
+    {
+        nome_antigo[k] = li->dados[i].nome[k];
+    }
+    
     for (int k = 0; k < 30; k++)
     {
         li->dados[i].nome[k] = novo_nome[k];
     }
+
+    strcpy(li->dados[i].h[li->dados[i].qtd_historico].ocorrencia, "Atualizou o nome");
+    obtem_data_atual(li->dados[i].h[li->dados[i].qtd_historico].data);
+    li->dados[i].qtd_historico++;
 }
